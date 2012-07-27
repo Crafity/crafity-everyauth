@@ -1,7 +1,7 @@
 {
   "name": "everyauth",
   "description": "Auth solution (password, facebook, & more) for your node.js Connect & Express apps",
-  "version": "0.2.32",
+  "version": "0.2.23",
   "homepage": "https://github.com/bnoguchi/everyauth/",
   "repository": {
     "type": "git",
@@ -15,7 +15,6 @@
     "facebook",
     "openid",
     "twitter",
-    "dropbox",
     "authorization",
     "authentication",
     "connect",
@@ -26,25 +25,20 @@
     "lib": "lib"
   },
   "dependencies": {
-    "oauth": "https://github.com/ciaranj/node-oauth/tarball/master",
-    "request": "2.9.x",
+    "oauth": ">=0.9.0",
+    "restler": ">=0.2.1",
     "connect": ">=1 <2",
-    "openid": ">=0.2.0",
-    "xml2js": ">=0.1.7",
-    "node-swt": ">=0.1.1",
-    "node-wsfederation": ">=0.1.1",
-    "debug": "0.5.0"
+    "openid": "=0.1.8",
+    "xml2js": ">=0.1.7"
   },
   "devDependencies": {
     "express": ">=2.3.10",
     "jade": ">=0.12.1",
     "tobi": ">=0.2.2",
-    "expect.js": ">=0.1.2",
-    "mocha": ">=0.13.0",
-    "satisfy": ">=0.1.0"
+    "expresso": ">=0.8.1",
+    "should": ">=0.2.1"
   },
   "engines": {
-    "node": ">=0.4"
-  },
-  "optionalDependencies": {}
+    "node": ">=0.4.0"
+  }
 }
