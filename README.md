@@ -1,11 +1,11 @@
-everyauth
+#crafity-everyauth [![Dependency status](https://david-dm.org/crafity/crafity-everyauth.png)](https://david-dm.org/crafity/crafity-everyauth) [![Travis Build Status](https://travis-ci.org/Crafity/crafity-everyauth.png?branch=master)](https://travis-ci.org/Crafity/crafity-everyauth) [![NPM Module version](https://badge.fury.io/js/crafity-everyauth.png)](http://badge.fury.io/js/crafity-everyauth)
 ==========
 
 Authentication and authorization (password, facebook, & more) for your node.js Connect and Express apps.
 
 There is a NodeTuts screencast of everyauth [here](http://nodetuts.com/tutorials/26-starting-with-everyauth.html#video)
 
-So far, `everyauth` enables you to login via:
+So far, `crafity-everyauth` enables you to login via:
 
 - `password`
 - `OpenId` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Credits [RocketLabs Development](https://github.com/rocketlabsdev), [Andrew Mee](https://github.com/starfishmod), [Brian Noguchi](https://github.com/bnoguchi))
@@ -30,12 +30,12 @@ So far, `everyauth` enables you to login via:
 - `box` (Box.net)
 - `LDAP` (experimental; not production-tested)
 
-`everyauth` is:
+`crafity-everyauth` is:
 
 - **Modular** - We have you covered with Facebook and Twitter 
   OAuth logins, basic login/password support, and modules 
   coming soon for beta invitation support and more.
-- **Easily Configurable** - everyauth was built with powerful
+- **Easily Configurable** - crafity-everyauth was built with powerful
   configuration needs in mind. Configure an authorization strategy 
   in a straightforward, easy-to-read & easy-to-write approach, 
   with as much granularity as you want over the steps and 
@@ -45,11 +45,11 @@ So far, `everyauth` enables you to login via:
 
 
 ## Installation
-    $ npm install everyauth
+    $ npm install crafity-everyauth
 
 
 ## Quick Start
-Using everyauth comes down to just 2 simple steps if using Connect
+Using crafity-everyauth comes down to just 2 simple steps if using Connect
 or 3 simple steps if using Express:
 
 1. **Choose and Configure Auth Strategies** - Find the authentication strategy
@@ -58,7 +58,7 @@ or 3 simple steps if using Express:
 2. **Add the Middleware to Connect**
         
     ```javascript
-    var everyauth = require('everyauth');
+    var everyauth = require('crafity-everyauth');
     // Step 1 code goes here
 
     // Step 2 code
@@ -85,7 +85,7 @@ or 3 simple steps if using Express:
     app.listen(3000);
     ```
     
-    For more about what view helpers `everyauth` adds to your app, see the section
+    For more about what view helpers `crafity-everyauth` adds to your app, see the section
     titled "Express Helpers" near the bottom of this README.
 
 ## Example Application
@@ -115,7 +115,7 @@ Then,
 
 ## Logging Out
 
-If you integrate `everyauth` with `connect`, then `everyauth` automatically
+If you integrate `crafity-everyauth` with `connect`, then `crafity-everyauth` automatically
 sets up a `logoutPath` at `GET` `/logout` for your app. It also
 sets a default handler for your logout route that clears your session
 of auth information and redirects them to '/'.
@@ -150,7 +150,7 @@ everyauth.everymodule.handleLogout( function (req, res) {
 ## Setting up Facebook Connect
 
 ```javascript
-var everyauth = require('everyauth')
+var everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
 everyauth.facebook
@@ -161,7 +161,7 @@ everyauth.facebook
     // /auth/facebook/callback?error_reason=user_denied&error=access_denied&error_description=The+user+denied+your+request.
     // This configurable route handler defines how you want to respond to
     // that.
-    // If you do not configure this, everyauth renders a default fallback
+    // If you do not configure this, crafity-everyauth renders a default fallback
     // view notifying the user that their authentication failed and why.
   })
   .findOrCreateUser( function (session, accessToken, accessTokExtra, fbUserMetadata) {
@@ -219,7 +219,7 @@ want to only ask for the "email" scope upon registration. At the same time, for
 another user, you may want to ask for "user_status" permissions because they
 have progressed further along in your application.
 
-`everyauth` enables you to specify the "scope" dynamically with a second
+`crafity-everyauth` enables you to specify the "scope" dynamically with a second
 variation of the configurable `scope`. In addition to the first variation
 that looks like:
 
@@ -247,10 +247,10 @@ everyauth.facebook
 ## Setting up Twitter OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.twitter
+crafity-everyauth.twitter
   .consumerKey('YOUR CONSUMER ID HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
@@ -266,15 +266,15 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
 
-**Important** - Some developers forget to do the following, and it causes them to have issues with `everyauth`.
+**Important** - Some developers forget to do the following, and it causes them to have issues with `crafity-everyauth`.
 Please make sure to do the following: When you set up your app at http://dev.twitter.com/, make sure that your callback url is set up to
 include that path '/auth/twitter/callback/'. In general, when dealing with OAuth or OAuth2 modules
-provided by `everyauth`, the default callback path is always set up to follow the pattern
+provided by `crafity-everyauth`, the default callback path is always set up to follow the pattern
 '/auth/#{moduleName}/callback', so just ensure that you configure your OAuth settings accordingly with
 the OAuth provider -- in this case, the "Edit Application Settings" section for your app at http://dev.twitter.com.
 
@@ -282,7 +282,7 @@ Alternatively, you can specify the callback url at the application level by conf
 has a default configuration of "/auth/twitter/callback"):
 
 ```javascript
-everyauth.twitter
+crafity-everyauth.twitter
   .consumerKey('YOUR CONSUMER ID HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .callbackPath('/custom/twitter/callback/path')
@@ -299,7 +299,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.twitter
+crafity-everyauth.twitter
   .entryPath('/auth/twitter')
   .callbackPath('/auth/twitter/callback');
 ```
@@ -308,24 +308,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.twitter.callbackPath(); // '/auth/twitter/callback'
-everyauth.twitter.entryPath(); // '/auth/twitter'
+crafity-everyauth.twitter.callbackPath(); // '/auth/twitter/callback'
+crafity-everyauth.twitter.entryPath(); // '/auth/twitter'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.twitter.configurable();
+crafity-everyauth.twitter.configurable();
 ```
 
 ## Setting up Password Authentication
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.password
+crafity-everyauth.password
   .getLoginPath('/login') // Uri path to the login page
   .postLoginPath('/login') // Uri path that your login form POSTs to
   .loginView('a string of html; OR the name of the jade/etc-view-engine view')
@@ -381,7 +381,7 @@ everyauth.password
     // As an edge case, sometimes your database may make you aware of violation
     // of the unique login index, so if this error is sent back in an async
     // callback, then you can just return that error as a single element array
-    // containing just that error message, and everyauth will automatically handle
+    // containing just that error message, and crafity-everyauth will automatically handle
     // that as a failed registration. Again, you will have access to this error via
     // the `errors` local in your register view jade template.
     // e.g.,
@@ -405,7 +405,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -414,7 +414,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.password
+crafity-everyauth.password
   .loginFormFieldName('login')       // Defaults to 'login'
   .passwordFormFieldName('password') // Defaults to 'password'
   .loginLayout('custom_login_layout') // Only with `express`
@@ -426,15 +426,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.password.loginFormFieldName();    // 'login'
-everyauth.password.passwordFormFieldName(); // 'password'
+crafity-everyauth.password.loginFormFieldName();    // 'login'
+crafity-everyauth.password.passwordFormFieldName(); // 'password'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.password.configurable();
+crafity-everyauth.password.configurable();
 ```
 
 ### Password Recipe 1: Extra registration data besides login + password
@@ -444,7 +444,7 @@ Sometimes your registration will ask for more information from the user besides 
 For this particular scenario, you can configure the optional step, `extractExtraRegistrationParams`.
 
 ```javascript
-everyauth.password.extractExtraRegistrationParams( function (req) {
+crafity-everyauth.password.extractExtraRegistrationParams( function (req) {
   return {
       phone: req.body.phone
     , name: {
@@ -457,20 +457,20 @@ everyauth.password.extractExtraRegistrationParams( function (req) {
 
 ### Password Recipe 2: Logging in with email or phone number
 
-By default, `everyauth` uses the field and user key name `login` during the
+By default, `crafity-everyauth` uses the field and user key name `login` during the
 registration and login process.
 
 Sometimes, you want to use `email` or `phone` instead of `login`. Moreover,
 you also want to validate `email` and `phone` fields upon registration.
 
-`everyauth` provides an easy way to do this:
+`crafity-everyauth` provides an easy way to do this:
 
 ```javascript
-everyauth.password.loginWith('email');
+crafity-everyauth.password.loginWith('email');
 
 // OR
 
-everyauth.password.loginWith('phone');
+crafity-everyauth.password.loginWith('phone');
 ```
 
 With simple login configuration like this, you get email (or phone) validation
@@ -480,16 +480,16 @@ otherwise would typically be referred to as 'login'.
 ### Password Recipe 3: Adding additional view local variables to login and registration views
 
 If you are using `express`, you are able to pass variables from your app
-context to your view context via local variables. `everyauth` provides
+context to your view context via local variables. `crafity-everyauth` provides
 several convenience local vars for your views, but sometimes you will want
 to augment this set of local vars with additional locals.
 
-So `everyauth` also provides a mechanism for you to do so via the following
+So `crafity-everyauth` also provides a mechanism for you to do so via the following
 configurables:
 
 ```javascript
-everyauth.password.loginLocals(...);
-everyauth.password.registerLocals(...);
+crafity-everyauth.password.loginLocals(...);
+crafity-everyauth.password.registerLocals(...);
 ```
 
 `loginLocals` and `registerLocals` configuration have symmetrical APIs, so I
@@ -500,14 +500,14 @@ You can configure this parameter in one of *3* ways. Why 3? Because there are 3 
 1. Static local vars that never change values:
    
        ```javascript
-       everyauth.password.loginLocals({
+       crafity-everyauth.password.loginLocals({
          title: 'Login'
        });
        ```
 2. Dynamic synchronous local vars that depend on the incoming request, but whose values are retrieved synchronously
    
        ```javascript
-       everyauth.password.loginLocals( function (req, res) {
+       crafity-everyauth.password.loginLocals( function (req, res) {
          var sess = req.session;
          return {
            isReturning: sess.isReturning
@@ -517,7 +517,7 @@ You can configure this parameter in one of *3* ways. Why 3? Because there are 3 
 3. Dynamic asynchronous local vars
    
        ```javascript
-       everyauth.password.loginLocals( function (req, res, done) {
+       crafity-everyauth.password.loginLocals( function (req, res, done) {
          asyncCall( function ( err, data) {
            if (err) return done(err);
            done(null, {
@@ -529,7 +529,7 @@ You can configure this parameter in one of *3* ways. Why 3? Because there are 3 
 
 ### Password Recipe 4: Customize Your Registration Validation
 
-By default, `everyauth.password` automatically
+By default, `crafity-everyauth.password` automatically
 
 - validates that the login (or email or phone, depending on what you authenticate with -- see Password Recipe 2) is present in the login http request, 
 - validates that the password is present
@@ -541,7 +541,7 @@ If any of these validations fail, then the appropriate errors are generated and 
 If you want to add additional validations beyond this, you can do so by configuring the step, `validateRegistration`:
 
 ```javascript
-everyauth.password
+crafity-everyauth.password
   .validateRegistration( function (newUserAttributes, baseErrors) {
     // Here, newUserAttributes is the hash of parameters extracted from the incoming request.
     // baseErrors is the array of errors generated by the default automatic validation outlined above
@@ -559,10 +559,10 @@ everyauth.password
 ## Setting up GitHub OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.github
+crafity-everyauth.github
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .findOrCreateUser( function (session, accessToken, , accessTokenExtra, githubUserMetadata) {
@@ -578,7 +578,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -587,7 +587,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
   
 ```javascript  
-everyauth.github
+crafity-everyauth.github
   .entryPath('/auth/github')
   .callbackPath('/auth/github/callback')
   .scope('repo'); // Defaults to undefined
@@ -599,24 +599,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.github.scope(); // undefined
-everyauth.github.entryPath(); // '/auth/github'
+crafity-everyauth.github.scope(); // undefined
+crafity-everyauth.github.entryPath(); // '/auth/github'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.github.configurable();
+crafity-everyauth.github.configurable();
 ```
 
 ## Setting up Instagram OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.instagram
+crafity-everyauth.instagram
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, instagramUserMetadata) {
@@ -632,7 +632,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -641,7 +641,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.instagram
+crafity-everyauth.instagram
   .entryPath('/auth/instagram')
   .callbackPath('/auth/instagram/callback')
   .scope('basic') // Defaults to 'basic'
@@ -655,24 +655,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.instagram.callbackPath(); // '/auth/instagram/callback'
-everyauth.instagram.entryPath(); // '/auth/instagram'
+crafity-everyauth.instagram.callbackPath(); // '/auth/instagram/callback'
+crafity-everyauth.instagram.entryPath(); // '/auth/instagram'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.instagram.configurable();
+crafity-everyauth.instagram.configurable();
 ```
 
 ## Setting up Foursquare OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.foursquare
+crafity-everyauth.foursquare
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, foursquareUserMetadata) {
@@ -688,7 +688,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -697,7 +697,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.foursquare
+crafity-everyauth.foursquare
   .entryPath('/auth/foursquare')
   .callbackPath('/auth/foursquare/callback');
 ```
@@ -706,24 +706,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.foursquare.callbackPath(); // '/auth/foursquare/callback'
-everyauth.foursquare.entryPath(); // '/auth/foursquare'
+crafity-everyauth.foursquare.callbackPath(); // '/auth/foursquare/callback'
+crafity-everyauth.foursquare.entryPath(); // '/auth/foursquare'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.foursquare.configurable();
+crafity-everyauth.foursquare.configurable();
 ```
 
 ## Setting up LinkedIn OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.linkedin
+crafity-everyauth.linkedin
   .consumerKey('YOUR CONSUMER ID HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, linkedinUserMetadata) {
@@ -739,7 +739,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -748,7 +748,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.linkedin
+crafity-everyauth.linkedin
   .entryPath('/auth/linkedin')
   .callbackPath('/auth/linkedin/callback');
 ```
@@ -757,24 +757,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.linkedin.callbackPath(); // '/auth/linkedin/callback'
-everyauth.linkedin.entryPath(); // '/auth/linkedin'
+crafity-everyauth.linkedin.callbackPath(); // '/auth/linkedin/callback'
+crafity-everyauth.linkedin.entryPath(); // '/auth/linkedin'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.linkedin.configurable();
+crafity-everyauth.linkedin.configurable();
 ```
 
 ## Setting up Google OAuth2
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.google
+crafity-everyauth.google
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .scope('https://www.google.com/m8/feeds') // What you want access to
@@ -783,7 +783,7 @@ everyauth.google
     // /auth/facebook/callback?error=access_denied
     // This configurable route handler defines how you want to respond to
     // that.
-    // If you do not configure this, everyauth renders a default fallback
+    // If you do not configure this, crafity-everyauth renders a default fallback
     // view notifying the user that their authentication failed and why.
   })
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, googleUserMetadata) {
@@ -802,7 +802,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -811,7 +811,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.google
+crafity-everyauth.google
   .entryPath('/auth/google')
   .callbackPath('/auth/google/callback');
 ```
@@ -820,31 +820,31 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.google.scope(); // undefined
-everyauth.google.entryPath(); // '/auth/google'
+crafity-everyauth.google.scope(); // undefined
+crafity-everyauth.google.entryPath(); // '/auth/google'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.google.configurable();
+crafity-everyauth.google.configurable();
 ```
 
 ## Setting up Gowalla OAuth2
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.gowalla
+crafity-everyauth.gowalla
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .handleAuthCallbackError( function (req, res) {
     // TODO - Update this documentation
     // This configurable route handler defines how you want to respond to
     // a response from Gowalla that something went wrong during the oauth2 process.
-    // If you do not configure this, everyauth renders a default fallback
+    // If you do not configure this, crafity-everyauth renders a default fallback
     // view notifying the user that their authentication failed and why.
   })
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, gowallaUserMetadata) {
@@ -863,7 +863,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -872,7 +872,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.gowalla
+crafity-everyauth.gowalla
   .entryPath('/auth/gowalla')
   .callbackPath('/auth/gowalla/callback');
 ```
@@ -881,15 +881,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.gowalla.scope(); // undefined
-everyauth.gowalla.entryPath(); // '/auth/gowalla'
+crafity-everyauth.gowalla.scope(); // undefined
+crafity-everyauth.gowalla.entryPath(); // '/auth/gowalla'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.gowalla.configurable();
+crafity-everyauth.gowalla.configurable();
 ```
 
 ## Setting up 37signals (Basecamp, Highrise, Backpack, Campfire) OAuth2
@@ -897,17 +897,17 @@ everyauth.gowalla.configurable();
 First, register an app at [integrate.37signals.com](https://integrate.37signals.com).
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth['37signals']
+crafity-everyauth['37signals']
   .appId('YOUR CLIENT ID HERE')
   .appSecret('YOUR CLIENT SECRET HERE')
   .handleAuthCallbackError( function (req, res) {
     // TODO - Update this documentation
     // This configurable route handler defines how you want to respond to
     // a response from 37signals that something went wrong during the oauth2 process.
-    // If you do not configure this, everyauth renders a default fallback
+    // If you do not configure this, crafity-everyauth renders a default fallback
     // view notifying the user that their authentication failed and why.
   })
   .findOrCreateUser( function (session, accessToken, accessTokenExtra, _37signalsUserMetadata) {
@@ -926,7 +926,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -935,7 +935,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth['37signals']
+crafity-everyauth['37signals']
   .entryPath('/auth/37signals')
   .callbackPath('/auth/37signals/callback');
 ```
@@ -944,23 +944,23 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth['37signals'].entryPath(); // '/auth/37signals'
+crafity-everyauth['37signals'].entryPath(); // '/auth/37signals'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth['37signals'].configurable();
+crafity-everyauth['37signals'].configurable();
 ```
 
 ## Setting up Yahoo OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.yahoo
+crafity-everyauth.yahoo
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, yahooUserMetadata) {
@@ -976,7 +976,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -985,7 +985,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.yahoo
+crafity-everyauth.yahoo
   .entryPath('/auth/yahoo')
   .callbackPath('/auth/yahoo/callback');
 ```
@@ -994,24 +994,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.yahoo.callbackPath(); // '/auth/yahoo/callback'
-everyauth.yahoo.entryPath(); // '/auth/yahoo'
+crafity-everyauth.yahoo.callbackPath(); // '/auth/yahoo/callback'
+crafity-everyauth.yahoo.entryPath(); // '/auth/yahoo'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.yahoo.configurable();
+crafity-everyauth.yahoo.configurable();
 ```
 
 ## Setting up Readability OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.readability
+crafity-everyauth.readability
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (sess, accessToken, accessSecret, reader) {
@@ -1030,7 +1030,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1039,7 +1039,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.readability
+crafity-everyauth.readability
   .entryPath('/auth/readability')
   .callbackPath('/auth/readability/callback');
 ```
@@ -1048,24 +1048,24 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.readability.callbackPath(); // '/auth/readability/callback'
-everyauth.readability.entryPath(); // '/auth/readability'
+crafity-everyauth.readability.callbackPath(); // '/auth/readability/callback'
+crafity-everyauth.readability.entryPath(); // '/auth/readability'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.readability.configurable();
+crafity-everyauth.readability.configurable();
 ```
 
 ## Setting up Dropbox OAuth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.dropbox
+crafity-everyauth.dropbox
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (sess, accessToken, accessSecret, user) {
@@ -1084,7 +1084,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1093,7 +1093,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.dropbox
+crafity-everyauth.dropbox
   .entryPath('/auth/dropbox')
   .callbackPath('/auth/dropbox/callback');
 ```
@@ -1102,15 +1102,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.dropbox.callbackPath(); // '/auth/dropbox/callback'
-everyauth.dropbox.entryPath(); // '/auth/dropbox'
+crafity-everyauth.dropbox.callbackPath(); // '/auth/dropbox/callback'
+crafity-everyauth.dropbox.entryPath(); // '/auth/dropbox'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.dropbox.configurable();
+crafity-everyauth.dropbox.configurable();
 ```
 
 ## Setting up Justin.tv OAuth
@@ -1118,10 +1118,10 @@ everyauth.dropbox.configurable();
 [Sign up for a Justin.tv account](http://www.justin.tv/user/signup) and activate it as a [developer account](http://www.justin.tv/developer/activate) to get your consumer key and secret.
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
   
-everyauth.justintv
+crafity-everyauth.justintv
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (sess, accessToken, accessSecret, justintvUser) {
@@ -1140,7 +1140,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1176,7 +1176,7 @@ The `justintvUser` parameter in the `.findOrCreateUser()` function above returns
 You can also configure more parameters (most are set to defaults) via the same chainable API:
 
 ```javascript
-everyauth.justintv
+crafity-everyauth.justintv
   .entryPath('/auth/justintv')
   .callbackPath('/auth/justintv/callback');
 ```
@@ -1184,14 +1184,14 @@ everyauth.justintv
 If you want to see what the current value of a configured parameter is, you can do so via:
 
 ```javascript
-everyauth.justintv.callbackPath(); // '/auth/justintv/callback'
-everyauth.justintv.entryPath(); // '/auth/justintv'
+crafity-everyauth.justintv.callbackPath(); // '/auth/justintv/callback'
+crafity-everyauth.justintv.entryPath(); // '/auth/justintv'
 ```
 
 To see all parameters that are configurable, the following will return an object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.justintv.configurable();
+crafity-everyauth.justintv.configurable();
 ```
 
 ## Setting up Vimeo OAuth
@@ -1199,10 +1199,10 @@ everyauth.justintv.configurable();
 You will first need to sign up for a [developer application](http://vimeo.com/api/applications) to get the consumer key and secret.
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.vimeo
+crafity-everyauth.vimeo
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (sess, accessToken, accessSecret, user) {
@@ -1221,7 +1221,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1230,7 +1230,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.vimeo
+crafity-everyauth.vimeo
   .entryPath('/auth/vimeo')
   .callbackPath('/auth/vimeo/callback');
 ```
@@ -1239,15 +1239,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.vimeo.callbackPath(); // '/auth/vimeo/callback'
-everyauth.vimeo.entryPath(); // '/auth/vimeo'
+crafity-everyauth.vimeo.callbackPath(); // '/auth/vimeo/callback'
+crafity-everyauth.vimeo.entryPath(); // '/auth/vimeo'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.vimeo.configurable();
+crafity-everyauth.vimeo.configurable();
 ```
 
 ## Setting up Tumblr OAuth (1.a)
@@ -1257,10 +1257,10 @@ During registration of your new app, enter a "Default callback URL" of "http://<
 Once you register your app, copy down your "OAuth Consumer Key" and "Secret Key" and proceed below.
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.tumblr
+crafity-everyauth.tumblr
   .consumerKey('YOUR CONSUMER KEY HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .findOrCreateUser( function (sess, accessToken, accessSecret, user) {
@@ -1279,7 +1279,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1288,7 +1288,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.tumblr
+crafity-everyauth.tumblr
   .entryPath('/auth/tumblr')
   .callbackPath('/auth/tumblr/callback');
 ```
@@ -1297,15 +1297,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.tumblr.callbackPath(); // '/auth/tumblr/callback'
-everyauth.tumblr.entryPath(); // '/auth/tumblr'
+crafity-everyauth.tumblr.callbackPath(); // '/auth/tumblr/callback'
+crafity-everyauth.tumblr.entryPath(); // '/auth/tumblr'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.tumblr.configurable();
+crafity-everyauth.tumblr.configurable();
 ```
 
 ## Setting up OpenID protocol
@@ -1313,10 +1313,10 @@ everyauth.tumblr.configurable();
 OpenID protocol allows you to use an openid auth request. You can read more information about it here http://openid.net/
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.openid
+crafity-everyauth.openid
   .myHostname('http://localhost:3000')
   .simpleRegistration({
       "nickname" : true
@@ -1352,7 +1352,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1362,10 +1362,10 @@ connect(
 OpenID+OAuth Hybrid protocol allows you to combine an openid auth request with a oauth access request. You can read more information about it here http://code.google.com/apis/accounts/docs/OpenID.html
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.googlehybrid
+crafity-everyauth.googlehybrid
   .consumerKey('YOUR CONSUMER ID HERE')
   .consumerSecret('YOUR CONSUMER SECRET HERE')
   .scope(['GOOGLE API SCOPE','GOOGLE API SCOPE'])
@@ -1382,7 +1382,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1390,10 +1390,10 @@ connect(
 ## Setting up Box.net Auth
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.box
+crafity-everyauth.box
   .apiKey('YOUR API KEY')
   .findOrCreateUser( function (sess, authToken, boxUser) {
     // find or create user logic goes here
@@ -1411,7 +1411,7 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
@@ -1420,7 +1420,7 @@ You can also configure more parameters (most are set to defaults) via
 the same chainable API:
 
 ```javascript    
-everyauth.box
+crafity-everyauth.box
   .entryPath('/auth/box')
   .callbackPath('/auth/box/callback');
 ```
@@ -1429,15 +1429,15 @@ If you want to see what the current value of a
 configured parameter is, you can do so via:
 
 ```javascript
-everyauth.box.callbackPath(); // '/auth/box/callback'
-everyauth.box.entryPath(); // '/auth/box'
+crafity-everyauth.box.callbackPath(); // '/auth/box/callback'
+crafity-everyauth.box.entryPath(); // '/auth/box'
 ```
 
 To see all parameters that are configurable, the following will return an
 object whose parameter name keys map to description values:
 
 ```javascript
-everyauth.box.configurable();
+crafity-everyauth.box.configurable();
 ```
 
 ## Setting up LDAP
@@ -1451,10 +1451,10 @@ Install OpenLDAP client libraries:
 Install [node-ldapauth](https://github.com/joewalnes/node-ldapauth):
 
 ```javascript
-var everyauth = require('everyauth')
+var crafity-everyauth = require('crafity-everyauth')
   , connect = require('connect');
 
-everyauth.ldap
+crafity-everyauth.ldap
   .host('your.ldap.host')
   .port(389)
 
@@ -1478,25 +1478,25 @@ connect(
     connect.bodyParser()
   , connect.cookieParser()
   , connect.session({secret: 'whodunnit'})
-  , everyauth.middleware()
+  , crafity-everyauth.middleware()
   , connect.router(routes);
 ).listen(3000);
 ```
 
 ## Accessing the User
 
-If you are using `express` or `connect`, then `everyauth` 
+If you are using `express` or `connect`, then `crafity-everyauth` 
 provides an easy way to access the user as:
 
 - `req.user` from your app server
-- `everyauth.user` via the `everyauth` helper accessible from your `express` views.
+- `crafity-everyauth.user` via the `crafity-everyauth` helper accessible from your `express` views.
 - `user` as a helper accessible from your `express` views
 
-To access the user, configure `everyauth.everymodule.findUserById`.
+To access the user, configure `crafity-everyauth.everymodule.findUserById`.
 For example, using [mongoose](http://github.com/LearnBoost/mongoose):
 
 ```javascript
-everyauth.everymodule.findUserById( function (userId, callback) {
+crafity-everyauth.everymodule.findUserById( function (userId, callback) {
   User.findById(userId, callback);
   // callback has the signature, function (err, user) {...}
 });
@@ -1516,41 +1516,41 @@ app.get('/', function (req, res) {
 });
 ```
 
-Moreover, you can access the user in your views as `everyauth.user` or as `user`.
+Moreover, you can access the user in your views as `crafity-everyauth.user` or as `user`.
 
     //- Inside ./views/home.jade
-    span.user-id= everyauth.user.name
+    span.user-id= crafity-everyauth.user.name
     #user-id= user.id
 
 ## Express Helpers
 
-If you are using express, everyauth comes with some useful dynamic helpers.
+If you are using express, crafity-everyauth comes with some useful dynamic helpers.
 To enable them:
 
 ```javascript
 var express = require('express')
-  , everyauth = require('everyauth')
+  , crafity-everyauth = require('crafity-everyauth')
   , app = express.createServer();
 
-everyauth.helpExpress(app);
+crafity-everyauth.helpExpress(app);
 ```
 
 Then, from within your views, you will have access to the following helpers methods
-attached to the helper, `everyauth`:
+attached to the helper, `crafity-everyauth`:
 
-- `everyauth.loggedIn`
-- `everyauth.user` - the User document associated with the session
-- `everyauth.facebook` - The is equivalent to what is stored at `req.session.auth.facebook`, 
+- `crafity-everyauth.loggedIn`
+- `crafity-everyauth.user` - the User document associated with the session
+- `crafity-everyauth.facebook` - The is equivalent to what is stored at `req.session.auth.facebook`, 
   so you can do things like ...
-- `everyauth.facebook.user` - returns the user json provided from the OAuth provider.
-- `everyauth.facebook.accessToken` - returns the access_token provided from the OAuth provider
+- `crafity-everyauth.facebook.user` - returns the user json provided from the OAuth provider.
+- `crafity-everyauth.facebook.accessToken` - returns the access_token provided from the OAuth provider
   for authorized API calls on behalf of the user.
-- And you also get this pattern for other modules - e.g., `everyauth.twitter.user`, 
-  `everyauth.github.user`, etc.
+- And you also get this pattern for other modules - e.g., `crafity-everyauth.twitter.user`, 
+  `crafity-everyauth.github.user`, etc.
 
 You also get access to the view helper
 
-- `user` - the same as `everyauth.user` above
+- `user` - the same as `crafity-everyauth.user` above
 
 As an example of how you would use these, consider the following `./views/user.jade` jade template:
 
@@ -1559,9 +1559,9 @@ As an example of how you would use these, consider the following `./views/user.j
       .value #{user.id}
     .facebook-id
       .label User Facebook Id
-      .value #{everyauth.facebook.user.id}
+      .value #{crafity-everyauth.facebook.user.id}
 
-`everyauth` also provides convenience methods on the `ServerRequest` instance `req`. 
+`crafity-everyauth` also provides convenience methods on the `ServerRequest` instance `req`. 
 From any scope that has access to `req`, you get the following convenience getters and methods:
 
 - `req.loggedIn` - a Boolean getter that tells you if the request is by a logged in user
@@ -1570,14 +1570,14 @@ From any scope that has access to `req`, you get the following convenience gette
 
 ## Configuring a Module
 
-everyauth was built with powerful configuration needs in mind.
+crafity-everyauth was built with powerful configuration needs in mind.
 
 Every module comes with a set of parameters that you can configure
 directly. To see a list of those parameters on a per module basis, 
 with descriptions about what they do, enter the following into the 
 node REPL (to access the REPL, just type `node` at the command line)
 
-    > var ea = require('everyauth');
+    > var ea = require('crafity-everyauth');
     > ea.facebook.configurable();
 
 For example, you will see that one of the configuration parameters is
@@ -1615,33 +1615,33 @@ We elaborate more about step function configuration in our
 
 ## Introspection
 
-everyauth provides convenient methods and getters for finding out
+crafity-everyauth provides convenient methods and getters for finding out
 about any module.
 
 Show all configurable parameters with their descriptions:
 
 ```javascript
-everyauth.facebook.configurable();
+crafity-everyauth.facebook.configurable();
 ```
 
 Show the value of a single configurable parameter:
 
 ```javascript
 // Get the value of the configurable callbackPath parameter
-everyauth.facebook.callbackPath(); // => '/auth/facebook/callback'
+crafity-everyauth.facebook.callbackPath(); // => '/auth/facebook/callback'
 ```
 
 Show the declared routes (pretty printed):
 
 ```javascript
-everyauth.facebook.routes;
+crafity-everyauth.facebook.routes;
 ```
 
 Show the steps initiated by a given route:
 
 ```javascript
-everyauth.facebook.route.get.entryPath.steps; 
-everyauth.facebook.route.get.callbackPath.steps;
+crafity-everyauth.facebook.route.get.entryPath.steps; 
+crafity-everyauth.facebook.route.get.callbackPath.steps;
 ```
 
 Sometimes you need to set up additional steps for a given auth
@@ -1652,7 +1652,7 @@ in your app. To see what that step is, you can introspect
 the `callbackPath` route with the facebook module.
 
 ```javascript
-everyauth.facebook.route.get.callbackPath.steps.incomplete;
+crafity-everyauth.facebook.route.get.callbackPath.steps.incomplete;
 // => [ { name: 'findOrCreateUser',
 //        error: 'is missing: its function' } ]
 ```
@@ -1663,7 +1663,7 @@ signature looks like for this step:
 
 ```javascript
 var matchingStep =
-everyauth.facebook.route.get.callbackPath.steps.filter( function (step) {
+crafity-everyauth.facebook.route.get.callbackPath.steps.filter( function (step) {
   return step.name === 'findOrCreateUser';
 })[0];
 // { name: 'findOrCreateUser',
@@ -1707,7 +1707,7 @@ You add this function as the block for the step `findOrCreateUser` just like
 you configure any other configurable parameter in your auth module:
 
 ```javascript
-everyauth.facebook
+crafity-everyauth.facebook
   .findOrCreateUser( function (session, accessToken, extra, oauthUser) {
     // Logic goes here
   });
@@ -1718,7 +1718,7 @@ There are also several other introspection tools at your disposal:
 For example, to show the submodules of an auth module by name:
 
 ```javascript
-everyauth.oauth2.submodules;
+crafity-everyauth.oauth2.submodules;
 ```
 
 Other introspection tools to describe (explanations coming soon):
@@ -1726,7 +1726,7 @@ Other introspection tools to describe (explanations coming soon):
 - *Invalid Steps*
     
     ```javascript    
-    everyauth.facebook.routes.get.callbackPath.steps.invalid
+    crafity-everyauth.facebook.routes.get.callbackPath.steps.invalid
     ```
 
 ## Debugging
@@ -1736,21 +1736,21 @@ Other introspection tools to describe (explanations coming soon):
 To turn on debugging:
 
 ```javascript
-everyauth.debug = true;
+crafity-everyauth.debug = true;
 ```
 
-Each everyauth auth strategy module is composed of steps. As each step begins and ends, everyauth will print out to the console the beginning and end of each step. So by turning on the debug flag, you get insight into what step everyauth is executing at any time.
+Each crafity-everyauth auth strategy module is composed of steps. As each step begins and ends, crafity-everyauth will print out to the console the beginning and end of each step. So by turning on the debug flag, you get insight into what step crafity-everyauth is executing at any time.
 
 ### Debugging - Configuring Error Handling
 
-By default, all modules handle errors by throwing them. That said, `everyauth` allows
+By default, all modules handle errors by throwing them. That said, `crafity-everyauth` allows
 you to over-ride this behavior.
 
 You can configure error handling at the module and step level. To handle *all*
 errors in the same manner across all auth modules that you use, do the following.
 
 ```javascript
-everyauth.everymodule.moduleErrback( function (err) {
+crafity-everyauth.everymodule.moduleErrback( function (err) {
   // Do something with the err -- e.g., log it, throw it
 });
 ```
@@ -1760,36 +1760,36 @@ you want to handle errors during the Facebook module differently than in other m
 
 
 ```javascript
-everyauth.facebook.moduleErrback( function (err) {
+crafity-everyauth.facebook.moduleErrback( function (err) {
   // Do something with the err -- e.g., log it, throw it
 });
 ```
 
 ### Debugging - Setting Timeouts
 
-By default, every module has 10 seconds to complete each step. If a step takes longer than 10 seconds to complete, then everyauth will pass a timeout error to your configured error handler (see section "Configure Error Handling" above).
+By default, every module has 10 seconds to complete each step. If a step takes longer than 10 seconds to complete, then crafity-everyauth will pass a timeout error to your configured error handler (see section "Configure Error Handling" above).
 
 If you would like to increase or decrease the timeout period across all modules, you can do so via:
 
 ```javascript
-everyauth.everymodule.moduleTimeout(2000); // Wait 2 seconds per step instead before timing out
+crafity-everyauth.everymodule.moduleTimeout(2000); // Wait 2 seconds per step instead before timing out
 ```
 
 You can eliminate the timeout altogether by configuring your timeouts to -1:
 
 ```javascript
-everyauth.everymodule.moduleTimeout(-1);
+crafity-everyauth.everymodule.moduleTimeout(-1);
 ```
 
 You can also configure the timeout period on a per module basis. For example, the following will result in the facebook module having 3 seconds to complete each step before timing out; all other modules will have the default 10 seconds per step before timing out.
 
 ```javascript
-everyauth.facebook.moduleTimeout(3000); // Wait 3 seconds
+crafity-everyauth.facebook.moduleTimeout(3000); // Wait 3 seconds
 ```
 
-## Modules and Projects that use everyauth
+## Modules and Projects that use crafity-everyauth
 
-Currently, the following module uses everyauth. If you are using everyauth
+Currently, the following module uses crafity-everyauth. If you are using crafity-everyauth
 in a project, app, or module, get in touch to get added to the list below:
 
 - [mongoose-auth](https://github.com/bnoguchi/mongoose-auth) Authorization plugin

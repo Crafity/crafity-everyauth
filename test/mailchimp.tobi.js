@@ -7,7 +7,7 @@ require('./util/expect.js');
 describe('Mailchimp', function () {
   var app, browser;
 
-  beforeEach( function () {
+  beforeEach(function () {
     delete require.cache[require.resolve('./app')]
     app = require('./app')
     tobi.Browser.browsers = {};
@@ -17,7 +17,7 @@ describe('Mailchimp', function () {
     browser.userAgent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
   });
 
-  afterEach( function () {
+  afterEach(function () {
     app.close();
   });
 
@@ -26,8 +26,7 @@ describe('Mailchimp', function () {
     browser.get('/auth/mailchimp', function (res, $) {
       $('#login-form')
         .fill({
-            username: creds.mailchimp.login
-          , password: creds.mailchimp.password })
+          username: creds.mailchimp.login, password: creds.mailchimp.password })
         .submit(function (res, $) {
           expect($('h2')).to.have.text('Authenticated');
           expect($('h2')).to.not.have.text('Not Authenticated');

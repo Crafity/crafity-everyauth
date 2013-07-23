@@ -6,7 +6,7 @@ require('./util/expect.js');
 describe('password', function () {
   var app, browser;
 
-  beforeEach( function () {
+  beforeEach(function () {
     delete require.cache[require.resolve('./app')]
     app = require('./app');
     tobi.Browser.browsers = {};
@@ -16,7 +16,7 @@ describe('password', function () {
     browser.userAgent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
   });
 
-  afterEach( function () {
+  afterEach(function () {
     app.close();
   });
 
@@ -25,7 +25,7 @@ describe('password', function () {
       browser.get('/register', function (res, $) {
         $('form')
           .fill({ email: 'newuser@example.com', password: 'pass' })
-          .submit( function (res, $) {
+          .submit(function (res, $) {
             expect(res).to.have.status(200);
             expect($('h2')).to.have.text('Authenticated');
             expect($('h2')).to.not.have.text('Not Authenticated');
@@ -39,7 +39,7 @@ describe('password', function () {
         browser.get('/register', function (res, $) {
           $('form')
             .fill({ email: '', password: '' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect(res).to.have.status(200);
               expect($('#errors li:first')).to.have.text('Missing email');
               expect($('#errors li:eq(1)')).to.have.text('Missing password');
@@ -54,7 +54,7 @@ describe('password', function () {
         browser.get('/register', function (res, $) {
           $('form')
             .fill({ email: 'newuser', password: 'pass' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect(res).to.have.status(200);
               expect($('#errors')).to.have.text('Please correct your email.');
               done();
@@ -66,7 +66,7 @@ describe('password', function () {
         browser.get('/register', function (res, $) {
           $('form')
             .fill({ email: 'newuser', password: '' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect(res).to.have.status(200);
               expect($('#errors li:first')).to.have.text('Please correct your email.');
               expect($('#errors li:eq(1)')).to.have.text('Missing password');
@@ -79,7 +79,7 @@ describe('password', function () {
         browser.get('/register', function (res, $) {
           $('form')
             .fill({ email: 'abc@example.com', password: '' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect(res).to.have.status(200);
               expect($('#errors')).to.have.text('Missing password');
               done();
@@ -94,7 +94,7 @@ describe('password', function () {
       browser.get('/login', function (res, $) {
         $('form')
           .fill({ email: 'brian@example.com', password: 'password' })
-          .submit( function (res, $) {
+          .submit(function (res, $) {
             expect(res).to.have.status(200);
             expect($('h2')).to.have.text('Authenticated');
             expect($('h2')).to.not.have.text('Not Authenticated');
@@ -108,7 +108,7 @@ describe('password', function () {
         browser.get('/login', function (res, $) {
           $('form')
             .fill({ email: 'brian@example.com', password: 'wrongpassword' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect(res).to.have.status(200);
               expect($('#errors')).to.have.text('Login failed');
               done();
@@ -120,7 +120,7 @@ describe('password', function () {
         browser.get('/login', function (res, $) {
           $('form')
             .fill({ email: 'brian@example.com', password: '' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect($('#errors')).to.have.text('Missing password');
               done();
             });
@@ -131,12 +131,12 @@ describe('password', function () {
         browser.get('/login', function (res, $) {
           $('form')
             .fill({ email: '', password: '' })
-            .submit( function (res, $) {
+            .submit(function (res, $) {
               expect($('#errors li:first')).to.have.text('Missing login');
               expect($('#errors li:eq(1)')).to.have.text('Missing password');
               done();
             });
-          });
+        });
       });
     });
   });

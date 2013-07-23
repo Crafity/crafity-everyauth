@@ -9,7 +9,9 @@ var expect = require('expect.js');
  */
 var Assertion = expect.Assertion
   , statusCodes = require('http').STATUS_CODES
-  , j = function(elem){ return '[jQuery ' + i(elem.selector.replace(/^ *\* */, '')) + ']'; }
+  , j = function (elem) {
+    return '[jQuery ' + i(elem.selector.replace(/^ *\* */, '')) + ']';
+  }
   , i = require('sys').inspect;
 
 /**
@@ -17,7 +19,7 @@ var Assertion = expect.Assertion
  */
 
 var nums = [
-    'none'
+  'none'
   , 'one'
   , 'two'
   , 'three'
@@ -33,7 +35,9 @@ var nums = [
  * @api private
  */
 
-function n(n) { return nums[n] || n; }
+function n(n) {
+  return nums[n] || n;
+}
 
 /**
  * Assert text as `str` or a `RegExp`.
@@ -43,24 +47,24 @@ function n(n) { return nums[n] || n; }
  * @api public
  */
 
-Assertion.prototype.text = function(str){
+Assertion.prototype.text = function (str) {
   var elem = this.obj
     , text = elem.text()
     , include = this.includes;
 
   if (str instanceof RegExp) {
     this.assert(
-        str.test(text)
-      , 'expected ' + j(elem)+ ' to have text matching ' + i(str)
+      str.test(text)
+      , 'expected ' + j(elem) + ' to have text matching ' + i(str)
       , 'expected ' + j(elem) + ' text ' + i(text) + ' to not match ' + i(str));
   } else if (include) {
     this.assert(
-        ~text.indexOf(str)
+      ~text.indexOf(str)
       , 'expected ' + j(elem) + ' to include text ' + i(str) + ' within ' + i(text)
       , 'expected ' + j(elem) + ' to not include text ' + i(str) + ' within ' + i(text));
   } else {
     this.assert(
-        str == text
+      str == text
       , 'expected ' + j(elem) + ' to have text ' + i(str) + ', but has ' + i(text)
       , 'expected ' + j(elem) + ' to not have text ' + i(str));
   }
@@ -77,13 +81,13 @@ Assertion.prototype.text = function(str){
  * @api public
  */
 
-Assertion.prototype.many = function(selector){
+Assertion.prototype.many = function (selector) {
   var elem = this.obj
     , elems = elem.find(selector)
     , len = elems.length;
 
   this.assert(
-      this.negate ? len > 1 : len
+    this.negate ? len > 1 : len
     , 'expected ' + j(elem) + ' to have many ' + i(selector) + ' tags, but has ' + n(len)
     , 'expected ' + j(elem) + ' to not have many ' + i(selector) + ' tags, but has ' + n(len));
 
@@ -100,13 +104,13 @@ Assertion.prototype.many = function(selector){
  * @api public
  */
 
-Assertion.prototype.one = function(selector, text){
+Assertion.prototype.one = function (selector, text) {
   var elem = this.obj
     , elems = elem.find(selector)
     , len = elems.length;
 
   this.assert(
-      1 == len
+    1 == len
     , 'expected ' + j(elem) + ' to have one ' + i(selector) + ' tag, but has ' + n(len)
     , 'expected ' + j(elem) + ' to not have one ' + i(selector) + ' tag, but has ' + n(len));
 
@@ -126,20 +130,20 @@ Assertion.prototype.one = function(selector, text){
  * @api public
  */
 
-Assertion.prototype.attr = function(key, val){
+Assertion.prototype.attr = function (key, val) {
   var elem = this.obj
     , attr = elem.attr(key);
 
   if (!val || (val && !this.negate)) {
     this.assert(
-        attr.length
+      attr.length
       , 'expected ' + j(elem) + ' to have attribute ' + i(key)
       , 'expected ' + j(elem) + ' to not have attribute ' + i(key) + ', but has ' + i(attr));
   }
 
   if (val) {
     this.assert(
-        val == attr
+      val == attr
       , 'expected ' + j(elem) + ' to have attribute ' + i(key) + ' with ' + i(val) + ', but has ' + i(attr)
       , 'expected ' + j(elem) + ' to not have attribute ' + i(key) + ' with ' + i(val));
   }
@@ -155,11 +159,11 @@ Assertion.prototype.attr = function(key, val){
  * @api public
  */
 
-Assertion.prototype.class = function(name){
+Assertion.prototype.class = function (name) {
   var elem = this.obj;
 
   this.assert(
-      elem.hasClass(name)
+    elem.hasClass(name)
     , 'expected ' + j(elem) + ' to have class ' + i(name) + ', but has ' + i(elem.attr('class'))
     , 'expected ' + j(elem) + ' to not have class ' + i(name));
 
@@ -167,7 +171,7 @@ Assertion.prototype.class = function(name){
 };
 
 /**
- * Assert that header `field` has the given `val`. 
+ * Assert that header `field` has the given `val`.
  *
  * @param {String} field
  * @param {String} val
@@ -175,7 +179,7 @@ Assertion.prototype.class = function(name){
  * @api public
  */
 
-Assertion.prototype.header = function(field, val){
+Assertion.prototype.header = function (field, val) {
   expect(this.obj).to.have.property('headers');
   expect(this.obj.headers).to.have.property(field.toLowerCase(), val);
   return this;
@@ -189,12 +193,12 @@ Assertion.prototype.header = function(field, val){
  * @api public
  */
 
-Assertion.prototype.status = function(code){
+Assertion.prototype.status = function (code) {
   expect(this.obj).to.have.property('statusCode');
   var status = this.obj.statusCode;
 
   this.assert(
-      code == status
+    code == status
     , 'expected response code of ' + code + ' ' + i(statusCodes[code])
       + ', but got ' + status + ' ' + i(statusCodes[status])
     , 'expected to not respond with ' + code + ' ' + i(statusCodes[code]));
@@ -324,7 +328,7 @@ Assertion.prototype.enabled = function () {
     , disabled = elem.attr('disabled');
 
   this.assert(
-      !disabled
+    !disabled
     , 'expected ' + j(elem) + ' to be enabled'
     , '<not implemented, use .disabled>');
 
@@ -343,7 +347,7 @@ Assertion.prototype.disabled = function () {
     , disabled = elem.attr('disabled');
 
   this.assert(
-      disabled
+    disabled
     , 'expected ' + j(elem) + ' to be disabled'
     , '<not implemented, use .enabled>');
 
@@ -377,11 +381,11 @@ Assertion.prototype.selected = bool('selected');
  */
 
 function bool(name) {
-  return function(){
+  return function () {
     var elem = this.obj;
 
     this.assert(
-        elem.attr(name)
+      elem.attr(name)
       , 'expected ' + j(elem) + ' to be ' + name
       , 'expected ' + j(elem) + ' to not be ' + name);
 
@@ -398,12 +402,12 @@ function bool(name) {
  */
 
 function attr(name) {
-  return function(expected){
+  return function (expected) {
     var elem = this.obj
       , val = elem.attr(name);
 
     this.assert(
-        expected == val
+      expected == val
       , 'expected ' + j(elem) + ' to have ' + name + ' ' + i(expected) + ', but has ' + i(val)
       , 'expected ' + j(elem) + ' to not have ' + name + ' ' + i(expected));
 

@@ -17,52 +17,51 @@ everyauth.debug = false;
 //     )
 everyauth.middleware = function () {
   var app = connect(
-      function registerReqGettersAndMethods (req, res, next) {
-        var methods = everyauth._req._methods
-          , getters = everyauth._req._getters;
-        for (var name in methods) {
-          req[name] = methods[name];
-        }
-        for (name in getters) {
-          Object.defineProperty(req, name, {
-            get: getters[name]
-          });
-        }
-        next();
+    function registerReqGettersAndMethods(req, res, next) {
+      var methods = everyauth._req._methods
+        , getters = everyauth._req._getters;
+      for (var name in methods) {
+        req[name] = methods[name];
       }
-    , function fetchUserFromSession (req, res, next) {
-        var sess = req.session
-          , auth = sess && sess.auth
-          , everymodule, findUser;
-        if (!auth) return next();
-        if (!auth.userId) return next();
-        everymodule = everyauth.everymodule;
-        if (!everymodule._findUserById) return next();
-        var pause = __pause(req);
-        everymodule._findUserById(auth.userId, function (err, user) {
-          if (err) throw err; // TODO Leverage everyauth's error handling
-          if (user) req.user = user;
-          else delete sess.auth;
-          next();
-          pause.resume();
+      for (name in getters) {
+        Object.defineProperty(req, name, {
+          get: getters[name]
         });
       }
+      next();
+    }
+    , function fetchUserFromSession(req, res, next) {
+      var sess = req.session
+        , auth = sess && sess.auth
+        , everymodule, findUser;
+      if (!auth) return next();
+      if (!auth.userId) return next();
+      everymodule = everyauth.everymodule;
+      if (!everymodule._findUserById) return next();
+      var pause = __pause(req);
+      everymodule._findUserById(auth.userId, function (err, user) {
+        if (err) throw err; // TODO Leverage everyauth's error handling
+        if (user) req.user = user;
+        else delete sess.auth;
+        next();
+        pause.resume();
+      });
+    }
     , connect.router(function (app) {
-        var modules = everyauth.enabled
-          , _module;
-        for (var _name in modules) {
-          _module = modules[_name];
-          _module.validateSteps();
-          _module.routeApp(app);
-        }
-      })
+      var modules = everyauth.enabled
+        , _module;
+      for (var _name in modules) {
+        _module = modules[_name];
+        _module.validateSteps();
+        _module.routeApp(app);
+      }
+    })
   );
   return app;
 };
 
 everyauth._req = {
-    _methods: {}
-  , _getters: {}
+  _methods: {}, _getters: {}
 };
 
 everyauth.addRequestMethod = function (name, fn) {
@@ -76,7 +75,7 @@ everyauth.addRequestGetter = function (name, fn, isAsync) {
 };
 
 everyauth
-  .addRequestMethod('logout', function () {
+  .addRequestMethod('logout',function () {
     var req = this;
     delete req.session.auth;
 
@@ -96,7 +95,7 @@ everyauth.enabled = {};
 // as the filename (minus '.js')
 var fs = require('fs');
 var files = fs.readdirSync(__dirname + '/lib/modules');
-var includeModules = files.map( function (fname) {
+var includeModules = files.map(function (fname) {
   return fname.substring(0, fname.length - 3);
 });
 for (var i = 0, l = includeModules.length; i < l; i++) {
@@ -117,4 +116,5 @@ for (var i = 0, l = includeModules.length; i < l; i++) {
       }
     })(name)
   });
-};
+}
+;

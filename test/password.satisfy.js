@@ -5,11 +5,11 @@ var satisfy = require('./util/satisfy');
 describe('password', function () {
   var app;
 
-  before( function () {
+  before(function () {
     app = require('./app');
   });
 
-  after( function () {
+  after(function () {
     app.close();
   });
 
@@ -67,9 +67,9 @@ describe('password', function () {
           .expect('#errors').to.have.text('Missing password')
 
           .run(done);
-        });
       });
     });
+  });
 
   describe('login', function () {
     var loginUrl = 'http://localhost:3000/login';

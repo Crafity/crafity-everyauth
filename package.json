@@ -1,81 +1,83 @@
 {
-	"name": "crafity-everyauth",
-	"description": "Auth solution (password, facebook, & more) for your node.js Connect & Express apps improved by Crafity",
-	"version": "0.2.25",
-	"author": "Bart Riemens <briemens@crafity.com>",
-	"homepage": "https://github.com/Crafity/crafity-everyauth#readme",
-	"keywords": [
-		"crafity",
-		"auth",
-		"oauth",
-		"password",
-		"facebook",
-		"openid",
-		"twitter",
-		"authorization",
-		"authentication",
-		"connect",
-		"express"
-	],
-	"maintainers": [
-		{
-			"name": "Bart Riemens",
-			"email": "briemens@crafity.com",
-			"web": "http://crafity.com/about/bart"
-		},
-		{
-			"name": "Galina Slavova",
-			"email": "galina@crafity.com",
-			"web": "http://crafity.com/about/galina"
-		}
-	],
-	"contributors": [
-		{
-			"name": "Bart Riemens",
-			"email": "briemens@crafity.com",
-			"web": "http://crafity.com/about/bart"
-		},
-		{
-			"name": "Galina Slavova",
-			"email": "galina@crafity.com",
-			"web": "http://crafity.com/about/galina"
-		}
-	],
-	"main": "./index.js",
-	"directories": {
-		"lib": "lib"
-	},
-	"licenses": [
-		{
-			"type": "The MIT License",
-			"url": "https://github.com/Crafity/crafity-everyauth/blob/master/LICENSE"
-		}
-	],
-	"bugs": {
-		"url": "https://github.com/Crafity/crafity-everyauth/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/crafity/crafity-everyauth"
-	},
-	"dependencies": {
-		"oauth": ">=0.9.0",
-		"restler": ">=0.2.1",
-		"connect": ">=1 <2",
-		"openid": "=0.1.8",
-		"xml2js": ">=0.1.7"
-	},
-	"devDependencies": {
-		"express": ">=2.3.10",
-		"jade": ">=0.12.1",
-		"tobi": ">=0.2.2",
-		"expresso": ">=0.8.1",
-		"should": ">=0.2.1"
-	},
-	"engines": {
-		"node": "*"
-	},
-	"scripts": {
-		"prepublish": "npm prune"
-	}
+  "name": "crafity-everyauth",
+  "description": "Auth solution (password, facebook, & more) for your node.js Connect & Express apps improved by Crafity",
+  "version": "0.3.0",
+  "author": "Bart Riemens <briemens@crafity.com>",
+  "homepage": "https://github.com/Crafity/crafity-everyauth#readme",
+  "keywords": [
+    "crafity",
+    "auth",
+    "oauth",
+    "password",
+    "facebook",
+    "openid",
+    "twitter",
+    "authorization",
+    "authentication",
+    "connect",
+    "express"
+  ],
+  "maintainers": [
+    {
+      "name": "Bart Riemens",
+      "email": "briemens@crafity.com",
+      "web": "http://crafity.com/about/bart"
+    },
+    {
+      "name": "Galina Slavova",
+      "email": "galina@crafity.com",
+      "web": "http://crafity.com/about/galina"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Bart Riemens",
+      "email": "briemens@crafity.com",
+      "web": "http://crafity.com/about/bart"
+    },
+    {
+      "name": "Galina Slavova",
+      "email": "galina@crafity.com",
+      "web": "http://crafity.com/about/galina"
+    }
+  ],
+  "main": "./index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "licenses": [
+    {
+      "type": "The MIT License",
+      "url": "https://github.com/Crafity/crafity-everyauth/blob/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Crafity/crafity-everyauth/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crafity/crafity-everyauth"
+  },
+  "dependencies": {
+    "oauth": ">=0.9.0",
+    "restler": ">=0.2.1",
+    "connect": ">=1 <2",
+    "openid": "=0.1.8",
+    "xml2js": ">=0.1.7",
+    "crafity-jstest": "~0.1.0"
+  },
+  "devDependencies": {
+    "express": ">=2.3.10",
+    "jade": ">=0.12.1",
+    "tobi": ">=0.2.2",
+    "expresso": ">=0.8.1",
+    "should": ">=0.2.1"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "prepublish": "npm prune",
+    "test": "scripts/npm-test.sh"
+  }
 }

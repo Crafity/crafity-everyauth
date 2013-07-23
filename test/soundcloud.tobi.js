@@ -7,7 +7,7 @@ require('./util/expect.js');
 describe('SoundCloud', function () {
   var app, browser;
 
-  beforeEach( function () {
+  beforeEach(function () {
     delete require.cache[require.resolve('./app')]
     app = require('./app')
     tobi.Browser.browsers = {};
@@ -17,7 +17,7 @@ describe('SoundCloud', function () {
     browser.userAgent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
   });
 
-  afterEach( function () {
+  afterEach(function () {
     app.close();
   });
 
@@ -26,8 +26,7 @@ describe('SoundCloud', function () {
     browser.get('/auth/soundcloud', function (res, $) {
       $('#oauth2-login-form')
         .fill({
-            username: creds.soundcloud.login
-          , password: creds.soundcloud.password })
+          username: creds.soundcloud.login, password: creds.soundcloud.password })
         .submit(function (res, $) {
           expect($('h2')).to.have.text('Authenticated');
           expect($('h2')).to.not.have.text('Not Authenticated');

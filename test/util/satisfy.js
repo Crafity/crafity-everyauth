@@ -24,7 +24,7 @@ Satisfaction.prototype.fill = function () {
   throw new Error("Unsupported function signature for Satisfaction.prototype.fill");
 };
 
-Satisfaction.prototype.submit = function submit () {
+Satisfaction.prototype.submit = function submit() {
   var submitSelector = ''
     , currFormSelector = this._currFormSelector;
   if (currFormSelector) {
@@ -40,12 +40,10 @@ Satisfaction.prototype.expect = function (selector) {
 };
 
 var flags = {
-    not: ['to', 'have']
-  , to: ['not', 'have']
-  , have: []
+  not: ['to', 'have'], to: ['not', 'have'], have: []
 };
 
-function Assertion (selector, satisfaction, flag, parent) {
+function Assertion(selector, satisfaction, flag, parent) {
   this.selector = selector;
   this.satisfaction = satisfaction;
 
@@ -68,7 +66,7 @@ function Assertion (selector, satisfaction, flag, parent) {
   var $flags = flag ? flags[flag] : Object.keys(flags)
     , self = this;
 
-  for (var i = $flags.length; i--; ) {
+  for (var i = $flags.length; i--;) {
     // avoid recursion
     if (this.flags[$flags[i]]) continue;
 
@@ -87,7 +85,7 @@ Assertion.prototype.text = function (str) {
 // Delegate any methods with satisfaction method names back to satisfaction
 
 var satisfyMethodNames = ['run', 'fill', 'expect', 'click', 'submit'];
-for (var i = satisfyMethodNames.length; i--; ) {
+for (var i = satisfyMethodNames.length; i--;) {
   var name = satisfyMethodNames[i];
   (function (name) {
     Assertion.prototype[name] = function () {
